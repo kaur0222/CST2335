@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">AndroidLabs</string>
+    <string name="app_name">My Application</string>
     <string name="hello_message">HelloWorld </string>
-    <string name = "ButtonText">I\'m a button</string>
+    <string name="ButtonText">I\'m a button</string>
+    <string name="TextView">Login</string>
+    <string name="TextView1">password</string>
+    <string name="RadioButton">RadioButton</string>
+    <string name="CheckBox">CheckBox</string>
+    <string name="Switch">What does  this do</string>
+    <string name="Image">Camera</string>
+    <string name="Hint1">login name</string>
+    <string name="Hint2">Password</string>
+
 </resources>
