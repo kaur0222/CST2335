@@ -17,7 +17,7 @@
         />
 
     <EditText
-        android:id="@+id/EdiTextViewTextView"
+        android:id="@+id/EdiTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/Hint1"
@@ -38,8 +38,17 @@
         android:hint="@string/Hint2"
         android:inputType="textPassword"
         />
+    <Button
+        android:id="@+id/Button"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/Button"
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
 
+        />
 
 
 
 </LinearLayout>
+

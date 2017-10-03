@@ -25,7 +25,7 @@
      android:layout_gravity="fill"
      />
  <Switch
-     android:id="@+id/Switch"
+     android:id="@+id/Switch1"
      android:layout_height="wrap_content"
      android:text="@string/Switch"
      android:layout_columnWeight="1"
