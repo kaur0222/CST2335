@@ -10,5 +10,9 @@
     <string name="Image">Camera</string>
     <string name="Hint1">login name</string>
     <string name="Hint2">Password</string>
-
+    <string name="dialog_title">TITLE</string>
+    <string name="dialog_message">This is my activity</string>
+    <string name="ok">OK</string>
+<string name="StartChat">Start Chat</string>
+    <string name="cancel">Cancel</string>
 </resources>

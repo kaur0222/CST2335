@@ -17,7 +17,7 @@
         />
 
     <EditText
-        android:id="@+id/EdiTextViewTextView"
+        android:id="@+id/EdiTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/Hint1"
@@ -40,6 +40,12 @@
         />
 
 
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login" />
 
 
 </LinearLayout>
