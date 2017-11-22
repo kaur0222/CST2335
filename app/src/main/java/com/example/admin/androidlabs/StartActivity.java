@@ -10,13 +10,19 @@ import android.widget.Toast;
 
 public class StartActivity extends Activity {
 private Button startButton;
+private Button StartChat;
     String TAG = "activity_start.xml";
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         startButton = (Button)findViewById(R.id.button);
-        buttonClickAction();
+        startchatClicked();
+        buttonClicked();
+
+        StartChat= (Button)findViewById(R.id.StartChat);
+
     }
 
     protected void onSaveInstanceState(Bundle outState)
@@ -25,6 +31,28 @@ private Button startButton;
         Log.i(TAG, "onSaveInstanceState");
 
     }
+
+
+
+    public void startChat(){
+        StartChat.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+                Log.i(TAG, "User clicked Start Chat");
+                Intent intent = new Intent(StartActivity.this, ChatWindow.class);
+                //startActivity(intent);
+                startActivityForResult(intent, 10);
+                onActivityResult(10,10, intent);
+            }
+        });
+    }
+
+
+
+
+
+
     @Override
     public void onResume(){
         super.onResume();
@@ -55,19 +83,36 @@ private Button startButton;
         Log.i(TAG, "onDestroy");
     }
 
-    private void buttonClickAction(){
+    private void buttonClicked(){
         startButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v){
                 Log.i(TAG, "clicked the button");
-                Intent intent = new Intent(StartActivity.this, ListItemActivity.class);
+                Intent intent = new Intent(StartActivity.this,ListItemActivity.class);
                 startActivityForResult(intent, 10);
                 onActivityResult(10,10, intent);
 
             }
         });
     }
+
+    private void startchatClicked(){
+        StartChat = (Button)findViewById(R.id.StartChat);
+        StartChat.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+                Log.i(TAG, "clicked the button");
+                Intent intent = new Intent(StartActivity.this, ChatWindow.class);
+                startActivityForResult(intent, 10);
+                onActivityResult(10,10, intent);
+
+            }
+        });
+    }
+
+
 
     public void onActivityResult(int requestCode, int responseCode, Intent data){
         if(requestCode == 10 ){

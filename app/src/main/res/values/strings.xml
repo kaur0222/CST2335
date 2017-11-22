@@ -13,6 +13,8 @@
     <string name="dialog_title">TITLE</string>
     <string name="dialog_message">This is my activity</string>
     <string name="ok">OK</string>
-<string name="StartChat">Start Chat</string>
+    <string name="StartChat">Start Chat</string>
     <string name="cancel">Cancel</string>
+    <string name="SendButton">SEND CHAT</string>
+    <string name="messageText">New Text</string>
 </resources>
