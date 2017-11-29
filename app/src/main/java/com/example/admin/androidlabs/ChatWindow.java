@@ -1,7 +1,11 @@
 package com.example.admin.androidlabs;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,26 +20,57 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ChatWindow extends Activity {
-    String TAG = "activity_chat_window.xml";
-    Button sendBtn;
+
+    protected ChatDatabaseHelper chatHelper ;
+    protected SQLiteDatabase dbd;
     EditText editTxt;
+    Button sendBtn;
     ArrayList<String> storeChat = new ArrayList<String> ();
+    protected static final String ACTIVITY_NAME = "ChatWindow";
     ChatAdapter messageAdapter;
+    ContentValues newValues = new ContentValues();
     TextView message;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
+        Resources resources = getResources();
+
         sendBtn = (Button)findViewById(R.id.buttonSend);
         editTxt = (EditText)findViewById(R.id.editTextChat);
+        Context context = getApplicationContext();
 
-        ListView list = (ListView)findViewById(R.id.showListView);
+         final ListView list = (ListView)findViewById(R.id.showListView);
         messageAdapter =new ChatAdapter( this );
         list.setAdapter (messageAdapter);
-        onClick();
-    }
+        chatHelper = new ChatDatabaseHelper(context);
 
-    public void onClick(){
+        newValues = new ContentValues();
+
+
+
+        chatHelper.open();
+
+        Cursor cursor = chatHelper.getChatMssages();
+        if(cursor.moveToFirst()){
+            do{
+                String msg = chatHelper.getMeessageFromCursor(cursor);
+                Log.i(ACTIVITY_NAME, "SQL Message: " +  msg);
+                Log.i(ACTIVITY_NAME, "Cursor's column count=" + cursor.getColumnCount());
+                storeChat.add(msg);
+                cursor.moveToNext();
+            }while(!cursor.isAfterLast());
+            messageAdapter.notifyDataSetChanged();
+
+        }
+
+        for (int i=0; i<cursor.getColumnCount(); i++) {
+            Log.i(ACTIVITY_NAME, cursor.getColumnName(i));
+
+        }
+
         sendBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -45,10 +80,21 @@ public class ChatWindow extends Activity {
                 storeChat.add(chatString);
                 messageAdapter.notifyDataSetChanged();
                 editTxt.setText("");
-
+                newValues.put("message" , chatString);
+                chatHelper.insert(newValues);
             }
         });
+
     }
+    protected void onDestroy(){
+        super.onDestroy();
+        if(chatHelper != null ){
+            chatHelper.close();
+        }
+    }
+
+
+
 
     private class ChatAdapter extends ArrayAdapter<String>
     {
