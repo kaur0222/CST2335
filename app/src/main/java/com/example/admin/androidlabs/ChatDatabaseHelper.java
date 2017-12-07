@@ -15,7 +15,7 @@ import android.util.Log;
 public class ChatDatabaseHelper extends SQLiteOpenHelper {
     public static String TAG = ChatDatabaseHelper.class.getSimpleName();
     public static final String DATABASE_NAME = "Messages.db";
-    public static final int VERSION_NUM = 1;
+    public static final int VERSION_NUM = 3;
     public static final String CHAT_TABLE ="CHAT_TABLE";
     SQLiteDatabase mdb;
     public static final String KEY_ID = "_id";
@@ -62,7 +62,7 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
         if(mdb != null){
             mdb.close();
         }
-    }
+     }
 
     // retrieving data
     public Cursor getChatMssages(){

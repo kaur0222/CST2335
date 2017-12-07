@@ -36,6 +36,7 @@ public class ChatWindow extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
+        //setContentView(R.layout.);
         Resources resources = getResources();
 
         sendBtn = (Button)findViewById(R.id.buttonSend);

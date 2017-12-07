@@ -11,6 +11,7 @@ import android.widget.Toast;
 public class StartActivity extends Activity {
 private Button startButton;
 private Button StartChat;
+private Button WeatherButton;
     String TAG = "activity_start.xml";
 
 
@@ -20,6 +21,8 @@ private Button StartChat;
         startButton = (Button)findViewById(R.id.button);
         startchatClicked();
         buttonClicked();
+        WeatherForecastClicked();
+
 
         StartChat= (Button)findViewById(R.id.StartChat);
 
@@ -112,6 +115,17 @@ private Button StartChat;
         });
     }
 
+    private void WeatherForecastClicked(){
+        WeatherButton = (Button)findViewById(R.id.button_weather_forecast);
+WeatherButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+
+        Intent intent = new Intent(getApplicationContext(),WeatherForecast.class);
+        startActivity(intent);
+    }
+});
+    }
 
 
     public void onActivityResult(int requestCode, int responseCode, Intent data){
