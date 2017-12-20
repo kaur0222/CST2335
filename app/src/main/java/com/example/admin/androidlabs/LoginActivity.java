@@ -1,16 +1,18 @@
 package com.example.admin.androidlabs;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.content.SharedPreferences;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.text.Editable;
+import android.content.Intent;
 
 public class LoginActivity extends Activity {
     String TAG = "activity_login.xml";
@@ -23,12 +25,10 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        passwordMsg = (EditText) findViewById(R.id.ETextView);
+
+        passwordMsg = (EditText) findViewById(R.id.editText2);
         msgButton = (Button)findViewById(R.id.button2);
-
         setupMessageButton();
-
-
     }
     protected void onSaveInstanceState(Bundle outState)
     {
@@ -80,20 +80,12 @@ public class LoginActivity extends Activity {
     }
 
     public void saveInfo(View v){
-        //SharedPreferences sharedPref = getSharedPreferences("FileName",MODE_PRIVATE);
-        //SharedPreferences.Editor prefEditor = sharedPref.edit();
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String mapTypeString = preferences.getString("DefaultEmail", "email@domain.com");
-
-        //prefEditor.putString("userPass",passwordMsg.getText().toString());
-        //prefEditor.apply();
-        //commit();
-
-
         Toast.makeText(this,"saved",Toast.LENGTH_LONG).show();
         Intent intent = new Intent(LoginActivity.this, StartActivity.class);
         startActivity(intent);
-
 
     }
 

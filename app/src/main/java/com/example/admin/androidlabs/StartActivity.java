@@ -1,31 +1,28 @@
 package com.example.admin.androidlabs;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.content.Intent;
 import android.widget.Toast;
 
 public class StartActivity extends Activity {
-private Button startButton;
-private Button StartChat;
-private Button WeatherButton;
     String TAG = "activity_start.xml";
+    Button startButton;
+    Button startChat;
+    Button weatherButton;
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        startButton = (Button)findViewById(R.id.button);
-        startchatClicked();
-        buttonClicked();
-        WeatherForecastClicked();
-
-
-        StartChat= (Button)findViewById(R.id.StartChat);
-
+        startButton = (Button)findViewById(R.id.buttonStart);
+        startButton.setPadding(0,0,0,100);
+        buttonClickAction();
+        onClickStartChat();
+        onClickWeather();
     }
 
     protected void onSaveInstanceState(Bundle outState)
@@ -34,28 +31,6 @@ private Button WeatherButton;
         Log.i(TAG, "onSaveInstanceState");
 
     }
-
-
-
-    public void startChat(){
-        StartChat.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v){
-                Log.i(TAG, "User clicked Start Chat");
-                Intent intent = new Intent(StartActivity.this, ChatWindow.class);
-                //startActivity(intent);
-                startActivityForResult(intent, 10);
-                onActivityResult(10,10, intent);
-            }
-        });
-    }
-
-
-
-
-
-
     @Override
     public void onResume(){
         super.onResume();
@@ -86,60 +61,59 @@ private Button WeatherButton;
         Log.i(TAG, "onDestroy");
     }
 
-    private void buttonClicked(){
+    private void buttonClickAction(){
         startButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v){
                 Log.i(TAG, "clicked the button");
-                Intent intent = new Intent(StartActivity.this,ListItemActivity.class);
+                Intent intent = new Intent(StartActivity.this, ListItemsActivity.class);
                 startActivityForResult(intent, 10);
                 onActivityResult(10,10, intent);
-
             }
         });
     }
 
-    private void startchatClicked(){
-        StartChat = (Button)findViewById(R.id.StartChat);
-        StartChat.setOnClickListener(new View.OnClickListener()
+    public void onActivityResult(int requestCode, int responseCode, Intent data){
+        if(requestCode == 10 ) {
+            Log.i(TAG, "Returned to StartActivity.onActivityResult");
+        }
+        if(responseCode == Activity.RESULT_OK){
+
+            String messagePassed = data.getStringExtra("Response");
+            Toast.makeText(getApplicationContext(),"my information to share" ,Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    public void onClickStartChat(){
+        startChat = (Button)findViewById(R.id.buttonChat);
+        //startChat.setPadding(0,100,0,0);
+
+        startChat.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v){
-                Log.i(TAG, "clicked the button");
-                Intent intent = new Intent(StartActivity.this, ChatWindow.class);
-                startActivityForResult(intent, 10);
-                onActivityResult(10,10, intent);
+                Log.i(TAG, "User clicked Start Chat");
+                //Intent intent = new Intent(StartActivity.this, ChatWindow.class);
+                Intent intent = new Intent(getApplicationContext(), ChatWindow.class);
+                startActivity(intent);
 
             }
         });
     }
 
-    private void WeatherForecastClicked(){
-        WeatherButton = (Button)findViewById(R.id.button_weather_forecast);
-WeatherButton.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-
-        Intent intent = new Intent(getApplicationContext(),WeatherForecast.class);
-        startActivity(intent);
+    public void onClickWeather(){
+        weatherButton = (Button)findViewById(R.id.button_Weather_forecast);
+        weatherButton.setOnClickListener(new View.OnClickListener(){
+                                             @Override
+                                             public void onClick(View v){
+                                                 Intent intent = new Intent(getApplicationContext(), WeatherForecast.class);
+                                                 startActivity(intent);
+                                             }
+                                         }
+        );
     }
-});
-    }
-
-
-    public void onActivityResult(int requestCode, int responseCode, Intent data){
-        if(requestCode == 10 ){
-            if(responseCode == Activity.RESULT_OK){
-                Log.i(TAG, "Returned to StartActivity.onActivityResult");
-                String messagePassed = data.getStringExtra("Response");
-                Toast.makeText(this,"my information to share", Toast.LENGTH_LONG).show();
-            }
-        }
-
-
-    }
-
 
 
 

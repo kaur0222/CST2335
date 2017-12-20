@@ -4,24 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.admin.androidlabs.ChatWindow">
 
 
     <ListView
         android:id="@+id/listViewChat"
         android:layout_width="300dp"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         android:layout_weight="2"
-        android:layout_above="@+id/buttonSend"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
 
     <Button
         android:text="@string/button_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonSend"
-        android:layout_alignParentRight="@+id/editTextChat"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
@@ -31,11 +31,11 @@
         android:inputType="text"
         android:ems="10"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@id/buttonSend"
         android:layout_alignTop="@id/buttonSend"
         android:layout_alignBottom="@id/buttonSend"
-        android:id="@+id/editTextChat"/>
+        android:gravity="fill_horizontal"
+        android:id="@+id/editTextChat"
+        android:layout_toStartOf="@+id/buttonSend" />
 
     <FrameLayout
         android:id="@+id/entryType"
@@ -47,6 +47,8 @@
         android:layout_alignParentStart="true">
 
     </FrameLayout>
+
+
 
 
 </RelativeLayout>

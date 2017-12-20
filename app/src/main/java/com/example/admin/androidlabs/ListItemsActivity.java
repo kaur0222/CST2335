@@ -1,20 +1,26 @@
 package com.example.admin.androidlabs;
 
+/**
+ * Created by Admin on 12/13/2017.
+ */
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.view.View;
+import android.content.Intent;
+import android.util.Log;
 import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.CheckBox;
 
-public class ListItemActivity extends Activity {
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+
+public class ListItemsActivity extends Activity {
     private static final int REQUEST_IMAGE_CAPTURE = 10;
     private static final int TAKE_PHOTO_REQUEST = 10;
     ImageButton imgBtn;
@@ -23,14 +29,14 @@ public class ListItemActivity extends Activity {
     Switch simpleSwitch;
     CheckBox simpleCheckBox;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_item);
-
-        imgBtn  = (ImageButton)findViewById(R.id.Image);
-        simpleSwitch = (Switch) findViewById(R.id.Switch);
-        simpleCheckBox = (CheckBox) findViewById(R.id.Checkbox);
+        imgBtn  = (ImageButton)findViewById(R.id.image1);
+        simpleSwitch = (Switch) findViewById(R.id.switch1);
+        simpleCheckBox = (CheckBox) findViewById(R.id.checkbox1);
         onClick();
         setOnCheckedChanged();
         OnCheckChanged();
@@ -48,7 +54,8 @@ public class ListItemActivity extends Activity {
                 onActivityResult(10,10, takePhotoIntent);
             }
 
-
+            private void getOutputMediaFileUri(int mediaTypeImage) {
+            }
         });
 
     }
@@ -85,7 +92,7 @@ public class ListItemActivity extends Activity {
             public void onClick(View v){
                 Log.i(TAG, "on check !");
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(ListItemActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ListItemsActivity.this);
                 // 2. Chain together various setter methods to set the dialog characteristics
                 builder.setMessage(R.string.dialog_message) //Add a dialog message to strings.xml
                         .setTitle(R.string.dialog_title)

@@ -1,31 +1,32 @@
 package com.example.admin.androidlabs;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 
-import android.util.Log;
-import android.util.Xml;
-import android.view.View;
 
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+        import android.app.Activity;
+        import android.content.Context;
+        import android.graphics.Bitmap;
+        import android.graphics.BitmapFactory;
+        import android.os.AsyncTask;
+        import android.os.Bundle;
+        import android.util.Log;
+        import android.util.Xml;
+        import android.view.View;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
+        import android.widget.ImageView;
+        import android.widget.ProgressBar;
+        import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+        import org.xmlpull.v1.XmlPullParser;
+
+
+        import java.io.File;
+        import java.io.FileInputStream;
+        import java.io.FileOutputStream;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.net.HttpURLConnection;
+        import java.net.MalformedURLException;
+        import java.net.URL;
 
 public class WeatherForecast extends Activity {
     protected static final String TAG = "WeatherForecast";
@@ -48,7 +49,9 @@ public class WeatherForecast extends Activity {
         weatherImage = (ImageView)findViewById(R.id.imageView2);
 
         ForecastQuery forecast = new ForecastQuery();
-        String  url = "http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=d99666875e0e51521f0040a3d97d0f6a&mode=xml&units=metric";
+        //String  url = "http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=d99666875e0e51521f0040a3d97d0f6a&mode=xml&units=metric";
+        String  url = "http://162.243.53.59/data/2.5/weather?q=ottawa,ca&APPID=d99666875e0e51521f0040a3d97d0f6a&mode=xml&units=metric";
+
         forecast.execute(url);
         //Log.i(TAG,"In onCreate()");
     }
@@ -124,14 +127,9 @@ public class WeatherForecast extends Activity {
                     }
                 }
 
-            }catch(MalformedURLException e ){
+            }catch(Exception e ){
+                Log.i(TAG, "filename " );
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (XmlPullParserException e) {
-                e.printStackTrace();
-            }catch (NullPointerException e) {
-                e.printStackTrace();
             }
             return null;
         }
